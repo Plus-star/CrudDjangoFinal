@@ -1,0 +1,49 @@
+{% extends "./base.html" %}
+
+{% block title %} Edicion de servicios{% endblock %}
+
+{% block body %}
+<h1>Servicios Estéticos</h1>
+
+<!-- Bloque para mostrar mensajes -->
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h1>Edicion de servicios</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'editar_registro_facial' registro.id %}" method="POST">{% csrf_token %}
+                    <div class="form-group pb-3">
+                        <input type="text"  name="nombreServicioFacial" class="form-control" placeholder="Nombre del servicio" value="{{TratamientoFacial.nombre_servicio}}" maxlength="100" required>
+                    </div>
+                    <div class="form-group pb-3">
+                        <input type="text"  name="txtdescripcionFacial" class="form-control" placeholder="Descripcion del servicio"  maxlength="100" required>
+                    </div>
+                    <div class="form-group pb-3">
+                        <input type="text"  name="txtduracionFacial" class="form-control" placeholder="Duracion del servicio"  maxlength="100" required>
+                    </div>
+                    <div class="form-group pb-3">
+                        <input type="text"  name="txtprecioFacial" class="form-control" placeholder="Precio del servicio"  maxlength="100" required>
+                    </div>
+                    <div class="form-group pb-3">
+                        <input type="text"  name="txtTipoTratamiento" class="form-control" placeholder="Tipo tratamiento"  maxlength="100" required>
+                    </div>
+                    <div class="form-group pb-3">
+                        <input type="text"  name="txtTipoPiel" class="form-control" placeholder="Tipo piel"  maxlength="100" required>
+                    </div>
+                    <div class="form-group pb-3">
+                        <button type="submit" class="btn btn-success btn-block text-white form-control">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

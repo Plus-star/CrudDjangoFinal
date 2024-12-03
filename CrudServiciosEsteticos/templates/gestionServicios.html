@@ -1,0 +1,245 @@
+{% extends "./base.html" %} {% block title %} Servicios esteticos{% endblock %}
+{% block body %}
+{% comment %} {% load custom_filters %} {% endcomment %}
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+    <h1>Gestión de Tratamiento</h1>
+    <div class="card">
+      <h2>Gestión de Tratamiento Facial</h2>
+      <div class="card-body">
+        <form action="/RegistrarFacial/" method="POST">
+          {% csrf_token %}
+          <div class="form-group pb-3">
+            <input
+              type="text"
+              name="txtnombreservicioFacial"
+              class="form-control"
+              placeholder="Nombre del servicio"
+              maxlength="100"
+              required
+            />
+          </div>
+          <div class="form-group pb-3">
+            <input
+              type="text"
+              name="txtdescripcionFacial"
+              class="form-control"
+              placeholder="Descripción del servicio"
+              maxlength="100"
+              required
+            />
+          </div>
+          <div class="form-group pb-3">
+            <input
+              type="text"
+              name="txtduracionFacial"
+              class="form-control"
+              placeholder="Duración del servicio"
+              maxlength="100"
+              required
+            />
+          </div>
+          <div class="form-group pb-3">
+            <input
+              type="text"
+              name="txtprecioFacial"
+              class="form-control"
+              placeholder="Precio del servicio"
+              maxlength="100"
+              required
+            />
+          </div>
+          <div class="form-group pb-3">
+            <input
+              type="text"
+              name="txtTipoTratamiento"
+              class="form-control"
+              placeholder="Tipo tratamiento"
+              maxlength="100"
+              required
+            />
+          </div>
+          <div class="form-group pb-3">
+            <input
+              type="text"
+              name="txtTipoPiel"
+              class="form-control"
+              placeholder="Tipo piel"
+              maxlength="100"
+              required
+            />
+          </div>
+          <div class="form-group pb-3">
+            <button
+              type="submit"
+              class="btn btn-success btn-block text-white form-control"
+            >
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Gestión de Tratamiento Corporal</h2>
+      <div class="card-body">
+        <form action="/RegistrarCorporal/" method="POST">
+          {% csrf_token %}
+          <div class="form-group pb-3">
+            <input
+              type="text"
+              name="txtnombreservicioCorporal"
+              class="form-control"
+              placeholder="Nombre del servicio"
+              maxlength="100"
+              required
+            />
+          </div>
+          <div class="form-group pb-3">
+            <input
+              type="text"
+              name="txtdescripcionCorporal"
+              class="form-control"
+              placeholder="Descripción del servicio"
+              maxlength="100"
+              required
+            />
+          </div>
+          <div class="form-group pb-3">
+            <input
+              type="text"
+              name="txtduracionCorporal"
+              class="form-control"
+              placeholder="Duración del servicio"
+              maxlength="100"
+              required
+            />
+          </div>
+          <div class="form-group pb-3">
+            <input
+              type="text"
+              name="txtprecioCorporal"
+              class="form-control"
+              placeholder="Precio del servicio"
+              maxlength="100"
+              required
+            />
+          </div>
+          <div class="form-group pb-3">
+            <input
+              type="text"
+              name="txtZonaTratada"
+              class="form-control"
+              placeholder="Zona tratada"
+              maxlength="100"
+              required
+            />
+          </div>
+          <div class="form-group pb-3">
+            <input
+              type="text"
+              name="txtTipoProducto"
+              class="form-control"
+              placeholder="Tipo producto"
+              maxlength="100"
+              required
+            />
+          </div>
+          <div class="form-group pb-3">
+            <button
+              type="submit"
+              class="btn btn-success btn-block text-white form-control"
+            >
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+    <h1>Listado de Facial</h1>
+    <div class="table-responsive py-2">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Id Servicio</th>
+            <th>Nombre del Servicio</th>
+            <th>Descripción del Servicio</th>
+            <th>Duración del Servicio</th>
+            <th>Precio del Servicio</th>
+            <th>Tipo Tratamiento</th>
+            <th>Tipo Piel</th>
+            <th>Precio con 50%</th>
+            <th colspan="2">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in ServiciosFacial %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ s.id }}</td>
+            <td>{{ s.nombre_servicio }}</td>
+            <td>{{ s.descripcion }}</td>
+            <td>{{ s.duracion }}</td>
+            <td>{{ s.precio }}</td>
+            <td>{{ s.tipo_tratamiento }}</td>
+            <td>{{ s.tipo_piel }}</td>
+            <td>{{ PreciosFinalesFaciales}}</td>
+            <td>
+              <a href="EdicionRegistroFacial/{{ s.id }}" class="btn btn-info">Editar</a>
+            </td>
+            <td>
+              <a href="EliminarRegistroFacial/{{ s.id }}" class="btn btn-danger btnEliminacion">Eliminar</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <h1>Listado de Corporal</h1>
+    <div class="table-responsive py-2">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Id Servicio</th>
+            <th>Nombre del Servicio</th>
+            <th>Descripción del Servicio</th>
+            <th>Duración del Servicio</th>
+            <th>Precio del Servicio</th>
+            <th>Zona Tratada</th>
+            <th>Tipo Producto</th>
+            <th>Precio con 40%</th>
+            <th colspan="2">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in ServiciosCoporales %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ s.id }}</td>
+            <td>{{ s.nombre_servicio }}</td>
+            <td>{{ s.descripcion }}</td>
+            <td>{{ s.duracion }}</td>
+            <td>{{ s.precio }}</td>
+            <td>{{ s.zona_tratada }}</td>
+            <td>{{ s.tipo_producto }}</td>
+            <td>{{ PreciosFinalesCorporales }}</td>
+            <td>
+              <a href="EdicionRegistroCorporal/{{ s.id }}" class="btn btn-info">Editar</a>
+            </td>
+            <td>
+              <a href="EliminarRegistroCorporal/{{ s.id }}" class="btn btn-danger btnEliminacion">Eliminar</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endblock %}
+</div>
